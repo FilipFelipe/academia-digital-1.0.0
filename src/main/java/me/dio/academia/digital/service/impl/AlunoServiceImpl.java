@@ -39,12 +39,18 @@ public class AlunoServiceImpl implements IAlunoService {
 
     @Override
     public Aluno update(Long id, AlunoUpdateForm formUpdate) {
-        return null;
+        Aluno aluno = repository.findById(id).get();
+        aluno.setNome(formUpdate.getNome());
+        aluno.setBairro(formUpdate.getBairro());
+        aluno.setDataDeNascimento(formUpdate.getDataDeNascimento());
+        return repository.save(aluno);
     }
 
     @Override
-    public void delete(Long id) {
-
+    public String delete(Long id) {
+        Aluno aluno = repository.findById(id).get();
+        repository.delete(aluno);
+        return "Ok";
     }
 
     @Override
